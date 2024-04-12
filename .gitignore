@@ -1,0 +1,55 @@
+class Expense:
+    def __init__(self, amount, category, description):
+        self.amount = amount
+        self.category = category
+        self.description = description
+
+class ExpenseTracker:
+    def __init__(self):
+        self.expenses = []
+
+    def add_expense(self, expense):
+        self.expenses.append(expense)
+
+    def get_total_spent(self):
+        return sum(expense.amount for expense in self.expenses)
+
+    def get_category_spending(self, category):
+        return sum(expense.amount for expense in self.expenses if expense.category == category)
+
+    def generate_report(self):
+        total_spent = self.get_total_spent()
+        print("Total amount spent: ${}".format(total_spent))
+        print("Category-wise spending:")
+        categories = set(expense.category for expense in self.expenses)
+        for category in categories:
+            category_spending = self.get_category_spending(category)
+            print("- {}: ${}".format(category, category_spending))
+
+def main():
+    tracker = ExpenseTracker()
+
+    while True:
+        print("\nExpense Tracker Menu:")
+        print("1. Add Expense")
+        print("2. Generate Report")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            amount = float(input("Enter amount spent: "))
+            category = input("Enter category: ")
+            description = input("Enter description: ")
+            expense = Expense(amount, category, description)
+            tracker.add_expense(expense)
+            print("Expense added successfully!")
+        elif choice == '2':
+            tracker.generate_report()
+        elif choice == '3':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
