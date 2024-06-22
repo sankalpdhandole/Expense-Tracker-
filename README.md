@@ -27,3 +27,6 @@ tracker.add_expense("Food", 20)
 tracker.add_expense("Entertainment", 100)
 
 tracker.view_expenses()
+
+
+OUTPUT:
